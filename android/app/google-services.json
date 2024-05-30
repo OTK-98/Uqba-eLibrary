@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "597033052119",
+    "project_id": "uqba-elibrary",
+    "storage_bucket": "uqba-elibrary.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:597033052119:android:305e91b0d3f7a7b19a8d92",
+        "android_client_info": {
+          "package_name": "com.uqba.elibrary"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAr3fjeQEnO7VEFH0vJ3ySSpqsLLvsDhbo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
