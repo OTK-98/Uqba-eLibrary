@@ -63,14 +63,15 @@ class CustomBookHeader extends StatelessWidget {
             children: [
               authController.isAuthorizedUser.value
                   ? CustomPopUpMenuButton(
-                      onPresseEdit: () {
+                      icon: Icons.more_horiz,
+                      onPressedEdit: () {
                         Get.to(
                           EditBookScreen(
                             book: book, // Pass the book details
                           ),
                         );
                       },
-                      onPressdDelete: () {
+                      onPressedDelete: () {
                         showDialog(
                           context: context,
                           builder: (BuildContext context) {

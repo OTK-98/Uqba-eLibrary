@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 
 class CustomPopUpMenuButton extends StatelessWidget {
-  final void Function()? onPresseEdit;
-  final void Function()? onPressdDelete;
+  final void Function()? onPressedEdit;
+  final void Function()? onPressedDelete;
+  final IconData icon;
 
   const CustomPopUpMenuButton({
     Key? key,
-    this.onPresseEdit,
-    this.onPressdDelete,
+    this.onPressedEdit,
+    this.onPressedDelete,
+    required this.icon,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton(
       color: Theme.of(context).colorScheme.primary,
-      icon: Icon(
-        Icons.more_horiz,
-      ),
+      icon: Icon(icon),
       itemBuilder: (BuildContext context) => [
         PopupMenuItem(
           child: Row(
@@ -41,9 +41,9 @@ class CustomPopUpMenuButton extends StatelessWidget {
       ],
       onSelected: (String value) {
         if (value == 'edit') {
-          onPresseEdit?.call();
+          onPressedEdit?.call();
         } else if (value == 'delete') {
-          onPressdDelete?.call();
+          onPressedDelete?.call();
         }
       },
     );
