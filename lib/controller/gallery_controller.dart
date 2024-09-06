@@ -12,6 +12,7 @@ class GalleryController extends GetxController {
   var selectedIndex = 0.obs;
   var currentPage = 0.obs;
   var isLoading = false.obs;
+  var uploadProgress = 0.0.obs;
 
   @override
   void onInit() {
@@ -42,15 +43,22 @@ class GalleryController extends GetxController {
 
   Future<void> addPostToFirestore(Map<String, dynamic> post) async {
     isLoading.value = true;
+    uploadProgress.value = 0.0;
 
     if (post['files'] != null && post['files'].isNotEmpty) {
-      // Files are selected, so upload them
       List<String> fileUrls = [];
       for (File file in post['files']) {
         String fileName = file.path.split('/').last;
         Reference ref =
             FirebaseStorage.instance.ref().child('posts').child(fileName);
         UploadTask uploadTask = ref.putFile(file);
+
+        // Listen to upload progress
+        uploadTask.snapshotEvents.listen((TaskSnapshot snapshot) {
+          uploadProgress.value = (snapshot.bytesTransferred.toDouble() /
+              snapshot.totalBytes.toDouble());
+        });
+
         TaskSnapshot taskSnapshot = await uploadTask;
         String url = await taskSnapshot.ref.getDownloadURL();
         fileUrls.add(url);

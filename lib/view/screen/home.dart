@@ -16,7 +16,6 @@ class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
 
   final BookController bookController = Get.put(BookController());
-
   final LoginController authController = Get.put(LoginController());
 
   Future<void> _refresh() async {
@@ -164,17 +163,21 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ),
-          floatingActionButton: authController.isAuthorizedUser.value
-              ? FloatingActionButton(
-                  onPressed: () {
-                    Get.to(AddBookScreen());
-                  },
-                  child: Icon(
-                    Icons.add,
-                    color: Color(0xFF573720),
-                  ),
-                )
-              : null,
+          floatingActionButton: Obx(() {
+            if (authController.isAuthorizedUser.value) {
+              return FloatingActionButton(
+                onPressed: () {
+                  Get.to(AddBookScreen());
+                },
+                child: Icon(
+                  Icons.add,
+                  color: Color(0xFF573720),
+                ),
+              );
+            } else {
+              return SizedBox.shrink(); // or return Container();
+            }
+          }),
         ),
       ),
     );

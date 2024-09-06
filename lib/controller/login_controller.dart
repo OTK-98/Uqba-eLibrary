@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:cloud_firestore/cloud_firestore.dart'; // Import Firestore
 import 'package:uqba_elibrary/controller/book_controller.dart';
 import 'package:uqba_elibrary/view/screen/gnav_bar.dart';
 import 'package:uqba_elibrary/view/screen/welcome.dart';
@@ -9,9 +10,12 @@ import '../Config/Messages.dart';
 
 class LoginController extends GetxController {
   RxBool isLoading = false.obs;
-  RxBool isAuthorizedUser = false.obs; // Added this line
+  RxBool isAuthorizedUser = false.obs;
   BookController bookController = Get.put(BookController());
   final auth = FirebaseAuth.instance;
+  final FirebaseFirestore firestore =
+      FirebaseFirestore.instance; // Firestore instance
+
   @override
   void onInit() {
     super.onInit();
@@ -22,13 +26,15 @@ class LoginController extends GetxController {
     bookController.getUserBook();
   }
 
-  void checkAuthorizationStatus() {
+  Future<void> checkAuthorizationStatus() async {
     String? currentUserEmail = auth.currentUser?.email;
     if (currentUserEmail != null) {
-      isAuthorizedUser.value = currentUserEmail == "kherfham123@gmail.com" ||
-          currentUserEmail == "moh2617khaled@gmail.com" ||
-          currentUserEmail == "khaled.farid1998@gmail.com" ||
-          currentUserEmail == "hbbmoi17@gmail.com";
+      QuerySnapshot snapshot = await firestore
+          .collection('adminUsers')
+          .where('email', isEqualTo: currentUserEmail)
+          .limit(1)
+          .get();
+      isAuthorizedUser.value = snapshot.docs.isNotEmpty;
     } else {
       isAuthorizedUser.value = false;
     }
@@ -45,6 +51,7 @@ class LoginController extends GetxController {
         idToken: googleAuth?.idToken,
       );
       await auth.signInWithCredential(credential);
+      await checkAuthorizationStatus(); // Check authorization status after login
       successMessage('تسجيل الدخول');
       Get.offAll(GNavBar());
 

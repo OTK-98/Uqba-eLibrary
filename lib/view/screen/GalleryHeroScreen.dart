@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:uqba_elibrary/view/widget/gallery/videoprovider.dart';
 import 'package:readmore/readmore.dart';
+import 'package:uqba_elibrary/view/widget/book/operator/custom_popupmenubutton.dart';
+import 'package:uqba_elibrary/controller/login_controller.dart';
+import 'package:uqba_elibrary/controller/gallery_controller.dart';
+import 'package:uqba_elibrary/view/widget/gallery/editpostdialog.dart';
 
 class GalleryHeroScreen extends StatefulWidget {
   final List<String> fileUrls;
@@ -23,6 +28,9 @@ class GalleryHeroScreen extends StatefulWidget {
 }
 
 class _GalleryHeroScreenState extends State<GalleryHeroScreen> {
+  final LoginController authController = Get.find<LoginController>();
+  final GalleryController galleryController = Get.put(GalleryController());
+
   bool _isPlaying = false;
   bool _showControls = true; // Initially show controls
   final Map<int, GlobalKey<VideoProviderState>> _videoKeys = {};
@@ -58,12 +66,89 @@ class _GalleryHeroScreenState extends State<GalleryHeroScreen> {
     });
   }
 
+  void _enterFullscreen(BuildContext context, int index) {
+    final videoKey = _videoKeys[index]!;
+    final currentPosition = videoKey.currentState!.controller.value.position;
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Scaffold(
+          backgroundColor: Colors.black,
+          body: Center(
+            child: AspectRatio(
+              aspectRatio: videoKey.currentState!.controller.value.aspectRatio,
+              child: VideoProvider(
+                file: null,
+                url: widget.fileUrls[index],
+                autoPlay: true,
+                initialPosition: currentPosition, // Pass the current position
+              ),
+            ),
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Icon(Icons.fullscreen_exit),
+          ),
+        ),
+      ),
+    ).then((_) {
+      // Restore video playback state when returning from fullscreen
+      if (_isPlaying) {
+        videoKey.currentState?.play();
+      } else {
+        videoKey.currentState?.pause();
+      }
+    });
+
+    // Pause the video when entering fullscreen mode
+    videoKey.currentState?.pause();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
         backgroundColor: Theme.of(context).colorScheme.primary,
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          leading: Obx(() {
+            return authController.isAuthorizedUser.value
+                ? CustomPopUpMenuButton(
+                    icon: Icons.more_vert,
+                    onPressedDelete: () {
+                      galleryController.deletePost(
+                          widget.initialIndex, context);
+                    },
+                    onPressedEdit: () {
+                      var postToEdit =
+                          galleryController.posts[widget.initialIndex];
+                      showDialog(
+                        context: context,
+                        builder: (context) => EditPostDialog(
+                          post: postToEdit,
+                          onPostEdited: (postId, updatedData) {
+                            galleryController.editPostInFirestore(
+                                postToEdit['id'], updatedData, postToEdit);
+                          },
+                        ),
+                      );
+                    },
+                  )
+                : SizedBox();
+          }),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.arrow_forward),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
         body: Stack(
           children: [
             PageView.builder(
@@ -105,6 +190,16 @@ class _GalleryHeroScreenState extends State<GalleryHeroScreen> {
                                     ),
                                     onPressed: () => _playPauseVideo(index),
                                   ),
+                                Positioned(
+                                  top: 10,
+                                  left: 10,
+                                  child: IconButton(
+                                    icon: Icon(Icons.fullscreen),
+                                    color: Colors.white,
+                                    onPressed: () =>
+                                        _enterFullscreen(context, index),
+                                  ),
+                                ),
                               ],
                             ),
                           ),
