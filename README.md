@@ -15,14 +15,12 @@ The "Uqba ibn Nafi" Endowment Digital Library application, affiliated with the Z
 ## Screenshots 📱
 
 <p float="left">
-  <img src="assets/screenshots/OnBoarding 3.png" width="300" />
-  <img src="assets/screenshots/Welcome.png" width="300" />
-  <img src="assets/screenshots/Home.png" width="300" />
-  <img src="assets/screenshots/Search.png" width="300" />
-  <img src="assets/screenshots/Profile.png" width="300" />
-  <img src="assets/screenshots/Categoriers.png" width="300" />
-  <img src="assets/screenshots/Book Details 01.png" width="300" />
-  <img src="assets/screenshots/Gallery 01.png" width="300" />
+  <img src="assets/screenshots/Welcome.png" width="200" />
+  <img src="assets/screenshots/Home.png" width="200" />
+  <img src="assets/screenshots/Profile.png" width="200" />
+  <img src="assets/screenshots/Categoriers.png" width="200" />
+  <img src="assets/screenshots/Book Details 01.png" width="200" />
+  <img src="assets/screenshots/Gallery 01.png" width="200" />
 </p>
 
 ## Installation and Setup 🚀
