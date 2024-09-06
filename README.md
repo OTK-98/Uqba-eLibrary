@@ -15,9 +15,7 @@ The "Uqba ibn Nafi" Endowment Digital Library application, affiliated with the Z
 ## Screenshots 📱
 
 <p float="left">
-  <img src="assets/screenshots/Splash.png" alt="Weather Details" width="300"" />
-  <img src="assets/screenshots/OnBoarding 1.png" alt="Forecasts Details" width="300" />
-  <img src="assets/screenshots/OnBoarding 2.png" alt="Forecasts Details" width="300" />
+  <img src="assets/screenshots/Splash.png" alt="Weather Details" width="300" />
   <img src="assets/screenshots/OnBoarding 3.png" alt="Forecasts Details" width="300" />
   <img src="assets/screenshots/Welcome.png" alt="Forecasts Details" width="300" />
   <img src="assets/screenshots/Home.png" alt="Forecasts Details" width="300" />
@@ -26,10 +24,7 @@ The "Uqba ibn Nafi" Endowment Digital Library application, affiliated with the Z
   <img src="assets/screenshots/Profile.png" alt="Forecasts Details" width="300" />
   <img src="assets/screenshots/Categoriers.png" alt="Forecasts Details" width="300" />
   <img src="assets/screenshots/Book Details 01.png" alt="Forecasts Details" width="300" />
-  <img src="assets/screenshots/Book Details 02.png" alt="Forecasts Details" width="300" />
   <img src="assets/screenshots/Gallery 01.png" alt="Forecasts Details" width="300" />
-  <img src="assets/screenshots/Gallery 02.png" alt="Forecasts Details" width="300" />
-  <img src="assets/screenshots/Add New Book 01.png" alt="Forecasts Details" width="300" />
   <img src="assets/screenshots/Add New Book 02.png" alt="Forecasts Details" width="300" />
 </p>
 
