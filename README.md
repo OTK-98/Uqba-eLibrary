@@ -15,17 +15,14 @@ The "Uqba ibn Nafi" Endowment Digital Library application, affiliated with the Z
 ## Screenshots 📱
 
 <p float="left">
-  <img src="assets/screenshots/Splash.png" alt="Weather Details" width="300" />
-  <img src="assets/screenshots/OnBoarding 3.png" alt="Forecasts Details" width="300" />
-  <img src="assets/screenshots/Welcome.png" alt="Forecasts Details" width="300" />
-  <img src="assets/screenshots/Home.png" alt="Forecasts Details" width="300" />
-  <img src="assets/screenshots/Search.png" alt="Forecasts Details" width="300" />
-  <img src="assets/screenshots/Favorite.png" alt="Forecasts Details" width="300" />
-  <img src="assets/screenshots/Profile.png" alt="Forecasts Details" width="300" />
-  <img src="assets/screenshots/Categoriers.png" alt="Forecasts Details" width="300" />
-  <img src="assets/screenshots/Book Details 01.png" alt="Forecasts Details" width="300" />
-  <img src="assets/screenshots/Gallery 01.png" alt="Forecasts Details" width="300" />
-  <img src="assets/screenshots/Add New Book 02.png" alt="Forecasts Details" width="300" />
+  <img src="assets/screenshots/OnBoarding 3.png" width="300" />
+  <img src="assets/screenshots/Welcome.png" width="300" />
+  <img src="assets/screenshots/Home.png" width="300" />
+  <img src="assets/screenshots/Search.png" width="300" />
+  <img src="assets/screenshots/Profile.png" width="300" />
+  <img src="assets/screenshots/Categoriers.png" width="300" />
+  <img src="assets/screenshots/Book Details 01.png" width="300" />
+  <img src="assets/screenshots/Gallery 01.png" width="300" />
 </p>
 
 ## Installation and Setup 🚀
